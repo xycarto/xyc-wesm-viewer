@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="https://openlayers.org/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WESM LiDAR Viewer POC</title>
+    <script type="module" crossorigin src="./assets/index-UupaE6Ue.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-lG3UTRO1.css">
+  </head>
+  <body>
+    <div id="map">
+      <div id="popup" class="ol-popup">
+        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+        <div id="popup-content"></div>
+      </div>
+      
+      <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <img class="banner" src="./assets/wairarapa-DSKeIM21.jpg" alt="Wairarapa">
+        <div class="title-ribbon">
+            <h1>CA_NoCAL_Wildfires_B1_2018</h1>
+        </div>
+        <div class="sidebar-content">
+          <p>Elevation visualizations in this viewer are derived from only vaild USGS LiDAR scans.</p>              
+          <hr>
+          <p><strong>Please select a layer from the control in the top right of the map window</strong></p>
+          <hr>
+          <div>
+            <h2>WESM Grid</h2>
+            <p>Regular grid of individual point cloud boundaries. Each point cloud from USGS is queried to capture boundaries, point count, file location on S3, and projection information<br></p>
+            <p>
+              <strong>Point Cloud Source:</strong> <a href="https://registry.opendata.aws/usgs-lidar/" target="_blank">https://registry.opendata.aws/usgs-lidar/</a>
+            </p>
+            <p><strong>GPKG:</strong>s3://xycarto-wesm-surfaces/src/data/cog/California/CA_NoCAL_Wildfires_B1_2018/tin-cog.tif</p>
+            <p><strong>Vector Tiles:</strong> http://127.0.0.1:8081/CA_NoCAL_Wildfires_B1_2018/{z}/{x}/{y}.pbf </p>
+          </div>
+          <div>
+              <h2>1m TIN Elevation Model</h2>
+              <p>This map represents the base elevation derived from LiDAR points. Tree tops, houses and other objects on the land are removed using a Triangular Irregular Network (TIN), revealing an idea of land elevation. A TIN is a representation of a continuous surface consisting entirely of triangular facets (a triangle mesh), used mainly as Discrete Global Grid in primary elevation modeling<br></p>
+              <p>
+                  <strong>Point Cloud Source (USGS):</strong> <a href="https://registry.opendata.aws/usgs-lidar/" target="_blank">https://registry.opendata.aws/usgs-lidar/</a>
+              </p>
+              <p><strong>COG:</strong> http://127.0.0.1:8080/tin-cog.tif</p>
+              <p><strong>XYZ:</strong> http://127.0.0.1:8080/tin/{z}/{x}/{y}.png</p>
+          </div>
+          <div>
+              <h2>1m DSM Model</h2>
+              <p> This map represents the elevation of all things on the surface derived from LiDAR points. In this map, one can make out where tree tops, house and other surface objects might be.<br></p>
+              <p>
+                <strong>Point Cloud Source (USGS):</strong> <a href="https://registry.opendata.aws/usgs-lidar/" target="_blank">https://registry.opendata.aws/usgs-lidar/</a>
+              </p>
+              <p><strong>COG:</strong> http://127.0.0.1:8080/dsm-cog.tif</p>
+              <p><strong>XYZ:</strong> http://127.0.0.1:8080/dsm/{z}/{x}/{y}.png</p>
+          </div>
+          <div>
+              <h2>Hillshades</h2>
+              <p> Shaded relief, or hillshading, is a technique where a lighting effect is added to a map based on elevation variations within the landscape. It provides a clearer picture of the topography by mimicing the sun’s effects (illumination, shading and shadows) on hills and canyons.<br></p>
+              <p>
+                <strong>Point Cloud Source (USGS):</strong> <a href="https://registry.opendata.aws/usgs-lidar/" target="_blank">https://registry.opendata.aws/usgs-lidar/</a>
+              </p>
+              <p><strong>TIN HS COG:</strong>http://127.0.0.1:8080/tin-hs-cog.tif</p>
+              <p><strong>DEM HS COG:</strong> http://127.0.0.1:8080/dsm-hs-cog.tif</p>
+          </div>
+          <hr>
+          <div>
+            <p>How to set up S3 COG Connections:</p>
+              <ul>
+                  <li><a href="https://www.linz.govt.nz/data/linz-data-service/guides-and-documentation/using-lds-wmts-in-qgis" target="_blank">QGIS</a></li>
+                  <li><a href="https://www.linz.govt.nz/data/linz-data-service/guides-and-documentation/using-lds-wmts-in-arcgis-desktop" target="_blank">ArcGIS</a></li>
+              </ul>
+              <p>How to set up Vector Tiles:</p>
+              <ul>
+                  <li><a href="https://www.linz.govt.nz/data/linz-data-service/guides-and-documentation/using-lds-wmts-in-qgis" target="_blank">Web Mercator</a></li>
+                  <li><a href="https://www.linz.govt.nz/data/linz-data-service/guides-and-documentation/using-lds-wmts-in-arcgis-desktop" target="_blank">Custom Projection</a></li>
+              </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="navbutton">
+        <button class="openbtn" onclick="openNav()">&#9776; Get Layer Information</button>
+      </div>
+    </div>
+      
+    <script src="./sidebar.js"></script>
+
+  </body>
+</html>

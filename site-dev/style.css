@@ -1,0 +1,227 @@
+@import "node_modules/ol/ol.css";
+
+html,
+body {
+  font: 11pt "Helvetica Neue", Arial, Helvetica, sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0; }
+  
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+/* PopUp */
+.ol-popup {
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+  bottom: 12px;
+  left: -50px;
+  min-width: 280px;
+}
+.ol-popup:after, .ol-popup:before {
+  top: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+.ol-popup:after {
+  border-top-color: white;
+  border-width: 10px;
+  left: 48px;
+  margin-left: -10px;
+}
+.ol-popup:before {
+  border-top-color: #cccccc;
+  border-width: 11px;
+  left: 48px;
+  margin-left: -11px;
+}
+.ol-popup-closer {
+  text-decoration: none;
+  top: 2px;
+  right: 8px;
+  float: right;
+}
+.ol-popup-closer:after {
+  content: "✖";
+}
+
+/* The sidebar menu */
+ .sidebar {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0;
+  left: 0;
+  background-color: #ffffff; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+}
+
+/* The sidebar links */
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #4b8fbd;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* The button used to open the sidebar */
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #777777;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#navbutton {
+  position: absolute;
+  z-index:10;
+  transition: margin-left .5s; /* If you want a transition effect */
+  padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+} 
+
+img.center {
+  display: block;
+  margin: 0 auto; }
+
+img.banner {
+  max-width: 100%;
+  height: auto;
+  display: block; }
+
+.sidebar-content {
+  margin: 15px;
+  padding: 5px;
+  padding-bottom: 60px; }
+
+.title-ribbon {
+  background-color: #777777;
+  color: #fff;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+@media (max-width: 599px) {
+  #feature-popup {
+    height: 50%;
+    bottom: 0;
+    position: absolute; }
+  #feature-popup .title-ribbon {
+    display: none; }
+  #feature-popup img.banner {
+    display: none; } }
+
+.bold {
+  font-weight: bold; }
+
+ul {
+  color: #777777;
+  margin: 0; }
+
+ul.dashed {
+  list-style-type: none; }
+
+p {
+  color: #777777;
+  margin-top: 0; }
+  
+h1 {
+color: white;
+font-size: 20pt;
+margin: 0;
+text-align: center; }
+
+h2 {
+color: #333333;
+font-size: 14pt;
+margin-bottom: 7px;
+margin-top: 10px; }
+
+h3 {
+color: #5D8462;
+font-size: 11pt;
+margin-bottom: 10px;
+margin-top: 10px; }
+
+h4 {
+color: #5D8462;
+font-size: 9pt;
+margin-bottom: 10px;
+margin-top: 10px; }
+
+hr {
+border: 1px solid #cccccc;
+border-top-width: 0px;
+margin-left: auto;
+margin-right: auto;
+width: 90%; }
+
+.menu {
+color: #fefefe;
+position: absolute;
+left: 17px;
+top: 17px;
+cursor: pointer;
+z-index: 2001; }
+
+.hidden {
+display: none; }
+
+.legend-item {
+width: 32px;
+height: 10px;
+display: inline-block;
+margin-right: 6px;
+line-height: normal; }
+
+.dot-legend {
+width: 14px;
+height: 14px;
+display: inline-block;
+border-radius: 50%;
+margin-right: 5px;
+vertical-align: middle; }
