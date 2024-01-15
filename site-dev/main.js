@@ -55,8 +55,8 @@ const dsmCogLoad = new GeoTIFF({
   sources: [
     {
       url: 'https://xyc-wesm-viewer.s3.us-west-2.amazonaws.com/data/cog/California/CA_NoCAL_Wildfires_B1_2018/dsm-cog.tif',
-      min: 1400,
-      max: 3000,
+      min: 190,
+      max: 3500,
       nodata: -9999,
     },
   ],
@@ -80,8 +80,8 @@ const tinCogLoad = new GeoTIFF({
   sources: [
     {
       url: 'https://xyc-wesm-viewer.s3.us-west-2.amazonaws.com/data/cog/California/CA_NoCAL_Wildfires_B1_2018/tin-cog.tif',      
-      min: 1400,
-      max: 3000,
+      min: 190,
+      max: 3500,
       nodata: -9999,
     },
   ],
@@ -105,9 +105,9 @@ const surfaceColor = {
       'interpolate',
       ['linear'],
       cogBand,
-      1400, [255, 255, 255, 0],
-      1401, [255, 255, 255, 1],
-      2500, [1, 1, 1, 1]
+      190, [255, 255, 255, 0],
+      191, [255, 255, 255, 1],
+      3500, [1, 1, 1, 1]
   ],
   };
 
