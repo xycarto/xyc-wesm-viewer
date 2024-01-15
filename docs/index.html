@@ -9,7 +9,7 @@
     <script type="module" crossorigin src="./assets/index-ge0m1S8f.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-uiXX5pdq.css">
   </head>
-  <body>
+  <body onload="openNav()">
     <div id="map">
       <div id="popup" class="ol-popup">
         <a href="#" id="popup-closer" class="ol-popup-closer"></a>
@@ -29,7 +29,7 @@
 
           <p> Data derived from USGS 3DEP point clouds at <a href="https://registry.opendata.aws/usgs-lidar/" target="_blank">https://registry.opendata.aws/usgs-lidar/</a> Elevation visualizations in this viewer are derived from only <strong>vaild</strong> USGS LiDAR scans. Point Cloud scans are developed into:
             <ul>
-              <li>1m TIN Surfaces</li>
+              <li>1m TIN Surfaces (DEM)</li>
               <li>1m DSM Surfaces</li>
               <li>1m TIN Hillshade Surfaces</li>
               <li>1m DSM Hillshade Surfaces</li>
@@ -50,7 +50,7 @@
           <p>
             <ul>
               <li>Select a layer from the control in the top right of the map window</li>
-              <li>Click on the layers in the map to obtain information</li>
+              <li>Click on the layers in the map to obtain information. *Only information for surfaces and grid is shown</li>
             </ul>
           </p>
           <p>
@@ -136,11 +136,12 @@
         </div>
       </div>
 
-      <div id="navbutton">
+      <div id="navbutton">             
         <button class="openbtn" onclick="toggleNav()">&#9776; Get Layer Information</button>
       </div>
     </div>
       
+    
     <script src="./sidebar.js" type="text/javascript"> </script>
   
 
