@@ -48,11 +48,11 @@
           <p>
             <ul>
               <li>Select a layer from the control in the top right of the map window</li>
-              <li>Click on the layers in the map to obtain information. *Only information for surfaces and grid is shown</li>
+              <li>Click on the layers in the map to obtain information. </li>
             </ul>
           </p>
           <p>
-            Information is dispalyed for the layers active in the viewer. 
+            Information is dispalyed for the layers active in the viewer. *Only information for surfaces and grid is shown
           </p>          
           <hr>
           <div>
@@ -70,7 +70,7 @@
 
           <div>
               <h3>1m TIN Elevation Model</h3>
-              <p>This map represents the base elevation derived from LiDAR points. Tree tops, houses and other objects on the land are removed using a Triangular Irregular Network (TIN), revealing an idea of land elevation. A TIN is a representation of a continuous surface consisting entirely of triangular facets (a triangle mesh), used mainly as Discrete Global Grid in primary elevation modeling<br></p>
+              <p>This map represents the base elevation derived from LiDAR points. Tree tops, houses, and other objects on the land are removed using a Triangular Irregular Network (TIN) model, revealing an idea of land elevation. A TIN is a representation of a continuous surface consisting entirely of triangular facets (a triangle mesh), used mainly as Discrete Global Grid in primary elevation modeling<br></p>
 
                 <p>TIN COG S3: <input id="tincog" value="s3://xyc-wesm-viewer/data/cog/California/CA_NoCAL_Wildfires_B1_2018/tin-cog.tif" /><button class="btn" data-clipboard-target="#tincog">
                   <img src="img/clipicon.svg" alt="Copy to clipboard" />
@@ -82,7 +82,7 @@
 
           <div>
               <h3>1m DSM Model</h3>
-              <p> This map represents the elevation of all things on the surface derived from LiDAR points. In this map, one can make out where tree tops, house and other surface objects might be.<br></p>
+              <p> This map represents the elevation of all things on the surface derived from LiDAR points. In this map, one can make out where tree tops, houses, and other surface objects might be.<br></p>
 
               <p>DSM COG S3: <input id="dsmcog" value="s3://xyc-wesm-viewer/data/cog/California/CA_NoCAL_Wildfires_B1_2018/dsm-cog.tif" /><button class="btn" data-clipboard-target="#dsmcog">
                 <img src="img/clipicon.svg" alt="Copy to clipboard" />
@@ -135,7 +135,7 @@
       </div>
 
       <div id="navbutton">             
-        <button class="openbtn" onclick="toggleNav()">&#9776; Get Layer Information</button>
+        <button class="openbtn" onclick="toggleNav()">&#9776; Layer Information</button>
       </div>
     </div>
       

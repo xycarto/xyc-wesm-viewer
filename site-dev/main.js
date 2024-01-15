@@ -214,7 +214,7 @@ const map = new Map({
   target: 'map',
   layers: [osm, overlayMaps],
   view: new View({
-    center: fromLonLat([-120.5, 39.3]),
+    center: fromLonLat([-120.8, 39.3]),
     zoom: 10,
     maxZoom: 16
 })
