@@ -17,12 +17,12 @@ RUN ?= docker run -it --rm  \
 ##### WESM Indexing #####
 
 ol-app:
-	$(RUN) npm create ol-app site-dev
+	npm create ol-app site-dev
 
 # make build-move indir=site-dev outdir=docs
 # 
 build-move:
-	$(RUN) python3 src/build-move.py $(indir) $(outdir)
+	python3 src/build-move.py $(indir) $(outdir)
 
 ##### DOCKER #####
 

@@ -4,7 +4,11 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="https://openlayers.org/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WESM LiDAR Viewer POC</title>
+    <script type="module" src="./main.js"></script>
+    <script src="./sidebar.js"></script>
+    <script type="module" src="./copyJS.js"></script>
+    
+  <title>WESM LiDAR Viewer POC</title>
   </head>
   <body>
     <div id="map">
@@ -20,59 +24,107 @@
             <h1>CA_NoCAL_Wildfires_B1_2018</h1>
         </div>
         <div class="sidebar-content">
-          <p>Elevation visualizations in this viewer are derived from only vaild USGS LiDAR scans.</p>              
-          <hr>
-          <p><strong>Please select a layer from the control in the top right of the map window</strong></p>
-          <hr>
+
           <div>
-            <h2>WESM Grid</h2>
-            <p>Regular grid of individual point cloud boundaries. Each point cloud from USGS is queried to capture boundaries, point count, file location on S3, and projection information<br></p>
-            <p>
-              <strong>Point Cloud Source:</strong> <a href="https://registry.opendata.aws/usgs-lidar/" target="_blank">https://registry.opendata.aws/usgs-lidar/</a>
-            </p>
-            <p><strong>GPKG:</strong>s3://xycarto-wesm-surfaces/src/data/cog/California/CA_NoCAL_Wildfires_B1_2018/tin-cog.tif</p>
-            <p><strong>Vector Tiles:</strong> http://127.0.0.1:8081/CA_NoCAL_Wildfires_B1_2018/{z}/{x}/{y}.pbf </p>
+            <p><strong>This site is in no way affiliated with any government entity and is purely for demonstration purposes only.</strong></p>
           </div>
+
+          <p> Data derived from USGS 3DEP point clouds at <a href="https://registry.opendata.aws/usgs-lidar/" target="_blank">https://registry.opendata.aws/usgs-lidar/</a> Elevation visualizations in this viewer are derived from only <strong>vaild</strong> USGS LiDAR scans. Point Cloud scans are developed into:
+            <ul>
+              <li>1m TIN Surfaces</li>
+              <li>1m DSM Surfaces</li>
+              <li>1m TIN Hillshade Surfaces</li>
+              <li>1m DSM Hillshade Surfaces</li>
+            </ul>
+          </p>
+          <p> A derived grid is also provided containing basic information for the point cloud. This information includes:
+            <ul>
+              <li>Native Projection</li>
+              <li>Point Cloud S3 Location</li>
+              <li>Boundary Information</li>
+              <li>Point Count</li>
+            </ul>          
+          </p>              
+          <hr>
+          <p>            
+            <strong>Site Usage:</strong> 
+          </p>
+          <p>
+            <ul>
+              <li>Select a layer from the control in the top right of the map window</li>
+              <li>Click on the layers to obtain information</li>
+            </ul>
+          </p>
+          <p>
+            Information is dispalyed for the layers active in the viewer.
+          </p>          
+          <hr>
           <div>
-              <h2>1m TIN Elevation Model</h2>
+            <h2>Basic Layer Information and Links</h2>
+            <h3>WESM Grid</h3>
+            <p>Regular grid of individual point cloud boundaries. Each point cloud from USGS is queried to capture boundaries, point count, file location on S3, and projection information<br></p>            
+            
+            <p>GPKG: <input id="gridgpkg" value="s3://xycarto-wesm-grids/data/index-indv/California/CA_NoCAL_Wildfires_B2_2018_index_6350.gpkg" /><button class="btn" data-clipboard-target="#gridgpkg">
+              <img src="img/clipicon.svg" alt="Copy to clipboard" />
+            </button></p> 
+            <p>Vector Tiles XYZ: <input id="vtxyz" value="https://xyc-wesm-viewer.s3.us-west-2.amazonaws.com/data/vector-tiles/California/CA_NoCAL_Wildfires_B1_2018/{z}/{x}/{y}.pbf" /><button class="btn" data-clipboard-target="#vtxyz">
+              <img src="img/clipicon.svg" alt="Copy to clipboard" />
+            </button></p> 
+          </div>
+
+          <div>
+              <h3>1m TIN Elevation Model</h3>
               <p>This map represents the base elevation derived from LiDAR points. Tree tops, houses and other objects on the land are removed using a Triangular Irregular Network (TIN), revealing an idea of land elevation. A TIN is a representation of a continuous surface consisting entirely of triangular facets (a triangle mesh), used mainly as Discrete Global Grid in primary elevation modeling<br></p>
-              <p>
-                  <strong>Point Cloud Source (USGS):</strong> <a href="https://registry.opendata.aws/usgs-lidar/" target="_blank">https://registry.opendata.aws/usgs-lidar/</a>
-              </p>
-              <p><strong>COG:</strong> http://127.0.0.1:8080/tin-cog.tif</p>
-              <p><strong>XYZ:</strong> http://127.0.0.1:8080/tin/{z}/{x}/{y}.png</p>
+
+                <p>TIN COG S3: <input id="tincog" value="s3://xyc-wesm-viewer/data/cog/California/CA_NoCAL_Wildfires_B1_2018/tin-cog.tif" /><button class="btn" data-clipboard-target="#tincog">
+                  <img src="img/clipicon.svg" alt="Copy to clipboard" />
+                </button></p> 
+                <p>TIN COG HTTP: <input id="tincoghttp" value="https://xyc-wesm-viewer.s3.us-west-2.amazonaws.com/data/cog/California/CA_NoCAL_Wildfires_B1_2018/tin-cog.tif" /><button class="btn" data-clipboard-target="#tincoghttp">
+                  <img src="img/clipicon.svg" alt="Copy to clipboard" />
+                </button></p> 
           </div>
+
           <div>
-              <h2>1m DSM Model</h2>
+              <h3>1m DSM Model</h3>
               <p> This map represents the elevation of all things on the surface derived from LiDAR points. In this map, one can make out where tree tops, house and other surface objects might be.<br></p>
-              <p>
-                <strong>Point Cloud Source (USGS):</strong> <a href="https://registry.opendata.aws/usgs-lidar/" target="_blank">https://registry.opendata.aws/usgs-lidar/</a>
-              </p>
-              <p><strong>COG:</strong> http://127.0.0.1:8080/dsm-cog.tif</p>
-              <p><strong>XYZ:</strong> http://127.0.0.1:8080/dsm/{z}/{x}/{y}.png</p>
+
+              <p>DSM COG S3: <input id="dsmcog" value="s3://xyc-wesm-viewer/data/cog/California/CA_NoCAL_Wildfires_B1_2018/dsm-cog.tif" /><button class="btn" data-clipboard-target="#dsmcog">
+                <img src="img/clipicon.svg" alt="Copy to clipboard" />
+              </button></p>  
+              <p>DSM COG HTTP: <input id="dsmcoghttp" value="https://xyc-wesm-viewer.s3.us-west-2.amazonaws.com/data/cog/California/CA_NoCAL_Wildfires_B1_2018/dsm-cog.tif" /><button class="btn" data-clipboard-target="#dsmcoghttp">
+                <img src="img/clipicon.svg" alt="Copy to clipboard" />
+              </button></p> 
           </div>
           <div>
-              <h2>Hillshades</h2>
+              <h3>Hillshades</h3>
               <p> Shaded relief, or hillshading, is a technique where a lighting effect is added to a map based on elevation variations within the landscape. It provides a clearer picture of the topography by mimicing the sun’s effects (illumination, shading and shadows) on hills and canyons.<br></p>
-              <p>
-                <strong>Point Cloud Source (USGS):</strong> <a href="https://registry.opendata.aws/usgs-lidar/" target="_blank">https://registry.opendata.aws/usgs-lidar/</a>
-              </p>
-              <p><strong>TIN HS COG:</strong>http://127.0.0.1:8080/tin-hs-cog.tif</p>
-              <p><strong>DEM HS COG:</strong> http://127.0.0.1:8080/dsm-hs-cog.tif</p>
+
+              <p>TIN Hillshade COG S3: <input id="tinhscog" value="s3://xyc-wesm-viewer/data/cog/California/CA_NoCAL_Wildfires_B1_2018/tin-hillshade-cog.tif" /><button class="btn" data-clipboard-target="#tinhscog">
+                <img src="img/clipicon.svg" alt="Copy to clipboard" />
+              </button></p>
+              <p>DSM Hillshade COG S3: <input id="dsmhscog" value="s3://xyc-wesm-viewer/data/cog/California/CA_NoCAL_Wildfires_B1_2018/dsm-hillshade-cog.tif" /><button class="btn" data-clipboard-target="#dsmhscog">
+                <img src="img/clipicon.svg" alt="Copy to clipboard" />
+              </button></p> 
+              <p>TIN Hillshade COG HTTP: <input id="tinhscog" value="https://xyc-wesm-viewer.s3.us-west-2.amazonaws.com/data/cog/California/CA_NoCAL_Wildfires_B1_2018/tin-hillshade-cog.tif" /><button class="btn" data-clipboard-target="#tinhscog">
+                <img src="img/clipicon.svg" alt="Copy to clipboard" />
+              </button></p>
+              <p>DSM Hillshade COG HTTP: <input id="dsmhscog" value="https://xyc-wesm-viewer.s3.us-west-2.amazonaws.com/data/cog/California/CA_NoCAL_Wildfires_B1_2018/dsm-hillshade-cog.tif" /><button class="btn" data-clipboard-target="#dsmhscog">
+                <img src="img/clipicon.svg" alt="Copy to clipboard" />
+              </button></p> 
           </div>
           <hr>
           <div>
-            <p>How to set up S3 COG Connections:</p>
-              <ul>
-                  <li><a href="https://www.linz.govt.nz/data/linz-data-service/guides-and-documentation/using-lds-wmts-in-qgis" target="_blank">QGIS</a></li>
-                  <li><a href="https://www.linz.govt.nz/data/linz-data-service/guides-and-documentation/using-lds-wmts-in-arcgis-desktop" target="_blank">ArcGIS</a></li>
-              </ul>
-              <p>How to set up Vector Tiles:</p>
-              <ul>
-                  <li><a href="https://www.linz.govt.nz/data/linz-data-service/guides-and-documentation/using-lds-wmts-in-qgis" target="_blank">Web Mercator</a></li>
-                  <li><a href="https://www.linz.govt.nz/data/linz-data-service/guides-and-documentation/using-lds-wmts-in-arcgis-desktop" target="_blank">Custom Projection</a></li>
-              </ul>
+            <h2>Connection Help</h2>
+              <h3>How to Set Up S3 COG and Vector Tile Connections in GIS editor</h3>
+                <p><a href="https://www.cogeo.org/qgis-tutorial.html" target="_blank">COGs in QGIS</a></p>
+                <p><a href="https://www.lutraconsulting.co.uk/blog/2020/06/10/vectortiles-part1/" target="_blank">Vector Tiles in QGIS</a></p>
+
+            <h3>How to Set Up S3 COG and Vector Tile Connections in Web Application</h3>
+              <p><a href="https://xycarto.com/2022/11/10/basic-cog-in-openlayers-single-band-tif/" target="_blank">COGs</a></p>
+              <p><a href="https://openlayers.org/en/latest/examples/osm-vector-tiles.html" target="_blank">Vector Tiles</a></p>
           </div>
+          <hr>
+          <p>Contact: info here</p>
         </div>
       </div>
 
@@ -81,8 +133,7 @@
       </div>
     </div>
       
-    <script type="module" src="./main.js"></script>
-    <script src="./sidebar.js"></script>
+    
 
   </body>
 </html>
