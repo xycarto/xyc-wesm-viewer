@@ -224,7 +224,8 @@ const map = new Map({
 // Build layer switcher
 const layerSwitcher = new LayerSwitcher({
   reverse: true,
-  groupSelectStyle: 'group'
+  groupSelectStyle: 'group',
+  startActive: true
 });
 map.addControl(layerSwitcher);
 
@@ -243,7 +244,7 @@ const overlay = new Overlay({
     },
   });
 
-container.style.width = '40vw';
+container.style.maxWidth = '50vw';
 
 closer.onclick = function () {
   overlay.setPosition(undefined);
