@@ -4,8 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="https://openlayers.org/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="./sidebar.js"></script>
-    
+        
   <title>WESM LiDAR Viewer POC</title>
     <script type="module" crossorigin src="./assets/index-8dnJU02Q.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-lG3UTRO1.css">
@@ -129,11 +128,11 @@
       </div>
 
       <div id="navbutton">
-        <button class="openbtn" onclick="openNav()">&#9776; Get Layer Information</button>
+        <button class="openbtn" onclick="openNav('', '_self', ''); closeNav();">&#9776; Get Layer Information</button>
       </div>
     </div>
       
-    
+    <script src="./sidebar.js"></script>
 
   </body>
 </html>

@@ -16,6 +16,8 @@ shutil.copytree(f"{dir_from}/dist/assets", f"{dir_to}/assets", dirs_exist_ok=Tru
 
 # Copy Files
 shutil.copy(f"{dir_from}/dist/index.html", f"{dir_to}")
+shutil.copy(f"{dir_from}/sidebar.js", f"{dir_to}")
+shutil.copy(f"{dir_from}/copyJS.js", f"{dir_to}")
 
 # Fix "assets" path in HTML
 with open(f"{dir_to}/index.html", 'r') as file:
