@@ -98,6 +98,19 @@ const tinHSCogLoad = new GeoTIFF({
   ],
 });
 
+const solarCogLoad = new GeoTIFF({
+  interpolate: false,
+  normalize: false,
+  sources: [
+    {
+      url: 'https://xyc-wesm-viewer.s3.us-west-2.amazonaws.com/data/cog/California/CA_NoCAL_Wildfires_B1_2018/solar-cog.tif',         
+      min: 45,
+      max: 1100,
+      nodata: 0,
+    },
+  ],
+});
+
 const cogBand = ['band', 1]
 
 const surfaceColor = {
@@ -108,6 +121,20 @@ const surfaceColor = {
       190, [255, 255, 255, 0],
       191, [255, 255, 255, 1],
       3500, [1, 1, 1, 1]
+  ],
+  };
+
+const solarColor = {
+  color: [
+      'interpolate',
+      ['linear'],
+      cogBand,
+      40, [0, 0, 4, 0],
+      41, [0, 0, 4, 1],
+      305, [80, 18, 123, 1],
+      564, [182, 55, 122, 1],
+      822, [252, 135, 97, 1],
+      1100, [252, 253, 191, 1]
   ],
   };
 
@@ -156,23 +183,32 @@ const tinHsCog = new TileLayer({
   style: hsColor,
 });
 
-// Make CHM
+const solarCog = new TileLayer({
+  title: 'Solar Average',
+  visible: false,
+  crossOrigin: 'anonymous',
+  source: solarCogLoad,
+  style: solarColor,
+});
+
+// // Make CHM
 
 // const chmSource = new GeoTIFF({
+//   interpolate: false,
 //   normalize: false,
 //   sources: [
 //     {
-//     url: 'https://xyc-wesm-viewer.s3.us-west-2.amazonaws.com/data/cog/California/CA_NoCAL_Wildfires_B1_2018/tin-cog.tif',      
-//     min: 1400,
-//     max: 3000,
-//     nodata: -9999,
-//     }, 
-//     {
 //       url: 'https://xyc-wesm-viewer.s3.us-west-2.amazonaws.com/data/cog/California/CA_NoCAL_Wildfires_B1_2018/dsm-cog.tif',      
 //       min: 1400,
-//       max: 3000,
+//       max: 3500,
 //       nodata: -9999,
 //     },
+//     {
+//     url: 'https://xyc-wesm-viewer.s3.us-west-2.amazonaws.com/data/cog/California/CA_NoCAL_Wildfires_B1_2018/tin-cog.tif',      
+//     min: 1400,
+//     max: 3500,
+//     nodata: -9999,
+//     }, 
 //   ]
 // });
 
@@ -185,9 +221,8 @@ const tinHsCog = new TileLayer({
 //       'interpolate',
 //       ['linear'],
 //       chm,
-//       1400, [255, 255, 255, 0],
-//       1401, [255, 255, 255, 1],
-//       2500, [1, 1, 1, 1]
+//       -0.2, [255, 255, 255, 1],
+//       0.5, [1, 1, 1, 1]
 //   ],
 // };
 
@@ -210,9 +245,15 @@ const overlayMaps = new LayerGroup({
   layers: [dsmCog, tinCog, tinHsCog, dsmHsCog, vectorTiles]
 });
 
+// Map Stuff
+const derivedMaps = new LayerGroup({
+  title: 'Calculated Layers',
+  layers: [solarCog,]
+});
+
 const map = new Map({
   target: 'map',
-  layers: [osm, overlayMaps],
+  layers: [osm, overlayMaps, derivedMaps],
   view: new View({
     center: fromLonLat([-120.8, 39.3]),
     zoom: 10,
